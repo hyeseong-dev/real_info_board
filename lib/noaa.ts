@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import { parseNoaaUtc } from "./time";
+import type { FailureCode } from "./domain";
 
 export const NOAA_SOLAR_WIND_URL =
   "https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json";
@@ -25,6 +26,13 @@ export type NormalizedSolarWind = {
   rawPayload: string;
 };
 
+export class SolarWindSourceError extends Error {
+  constructor(public readonly code: FailureCode, message: string) {
+    super(message);
+    this.name = "SolarWindSourceError";
+  }
+}
+
 export function selectLatestActive(rawPayload: string): NormalizedSolarWind {
   const decoded: unknown = JSON.parse(rawPayload);
   const rows = responseSchema.parse(decoded);
@@ -48,12 +56,32 @@ export function selectLatestActive(rawPayload: string): NormalizedSolarWind {
 }
 
 export async function fetchSolarWind(signal?: AbortSignal): Promise<NormalizedSolarWind> {
-  const response = await fetch(NOAA_SOLAR_WIND_URL, {
-    signal,
-    cache: "no-store",
-    headers: { Accept: "application/json" },
-  });
-  if (!response.ok) throw new Error(`NOAA request failed with ${response.status}`);
-  return selectLatestActive(await response.text());
+  try {
+    const response = await fetch(NOAA_SOLAR_WIND_URL, {
+      signal,
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (response.status === 401 || response.status === 403) {
+      throw new SolarWindSourceError("upstream_denied", `NOAA denied the request with ${response.status}`);
+    }
+    if (response.status === 429) {
+      throw new SolarWindSourceError("rate_limited", "NOAA rate limit reached");
+    }
+    if (!response.ok) {
+      throw new SolarWindSourceError("offline", `NOAA request failed with ${response.status}`);
+    }
+    try {
+      return selectLatestActive(await response.text());
+    } catch (error) {
+      if (error instanceof SolarWindSourceError) throw error;
+      throw new SolarWindSourceError("format_changed", "NOAA response did not match the expected format");
+    }
+  } catch (error) {
+    if (error instanceof SolarWindSourceError) throw error;
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new SolarWindSourceError("slow_response", "NOAA response exceeded the timeout");
+    }
+    throw new SolarWindSourceError("offline", "Could not reach NOAA");
+  }
 }
-

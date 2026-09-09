@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { BoardSnapshot } from "@/lib/domain";
 import { formatKst } from "@/lib/time";
 
@@ -104,6 +105,11 @@ export function BoardClient() {
           <h2>태양이 보내온<br />보이지 않는 흐름</h2>
           <p>태양풍은 태양에서 방출되어 우주를 흐르는 입자들의 움직임입니다. 이 화면은 지구 상류의 관측기가 확인한 양성자 속도 하나를 보여줍니다.</p>
         </div>
+      </section>
+
+      <section className="lab-cta">
+        <p>데이터가 멈춘 다섯 순간을 직접 확인해 보세요.</p>
+        <Link href="/lab">검증 실험실 열기 ↗</Link>
       </section>
 
       <footer><span>COSMIC PULSE</span><span>DATA WITH CONTEXT · 2026</span></footer>

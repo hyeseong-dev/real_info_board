@@ -1,5 +1,12 @@
 export type Freshness = "fresh" | "stale" | "empty";
 
+export type FailureCode =
+  | "slow_response"
+  | "upstream_denied"
+  | "rate_limited"
+  | "offline"
+  | "format_changed";
+
 export type SolarWindRecord = {
   dayKey: string;
   speedKms: number;
@@ -17,5 +24,18 @@ export type BoardSnapshot = {
   previous: SolarWindRecord | null;
   deltaKms: number | null;
   message: string | null;
+  errorCode?: FailureCode | null;
 };
 
+export type SyntheticRun = {
+  fixtureId: string;
+  label: string;
+  status: "stale" | "fresh";
+  errorCode: FailureCode | null;
+  explanation: string;
+  action: string;
+  dailyCount: number;
+  lastGoodValue: number;
+  lastGoodObservedAtUtc: string;
+  lastGoodFetchedAtUtc: string;
+};
