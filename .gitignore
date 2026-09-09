@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.vercel/
+.data/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.local
+.env.*.local
+!.env.example
+npm-debug.log*
+coverage/
+*.tsbuildinfo
