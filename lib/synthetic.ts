@@ -1,6 +1,6 @@
-import type { FailureCode, SyntheticRun } from "./domain";
+import type { SyntheticFailureCode, SyntheticRun } from "./domain";
 
-export const DEVELOPMENT_FIXTURES: Record<FailureCode, Omit<SyntheticRun, "status" | "dailyCount" | "lastGoodValue" | "lastGoodObservedAtUtc" | "lastGoodFetchedAtUtc">> = {
+export const DEVELOPMENT_FIXTURES: Record<SyntheticFailureCode, Omit<SyntheticRun, "status" | "dailyCount" | "lastGoodValue" | "lastGoodObservedAtUtc" | "lastGoodFetchedAtUtc">> = {
   slow_response: {
     fixtureId: "DEV-SLOW",
     label: "느린 응답",
@@ -44,7 +44,7 @@ const D1 = {
   fetchedAt: "2030-01-14T03:00:00.000Z",
 };
 
-export function replayDevelopmentFailure(code: FailureCode): SyntheticRun {
+export function replayDevelopmentFailure(code: SyntheticFailureCode): SyntheticRun {
   return {
     ...DEVELOPMENT_FIXTURES[code],
     status: "stale",

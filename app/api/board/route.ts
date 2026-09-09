@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  return NextResponse.json(readBoard());
+  return NextResponse.json(await readBoard());
 }
 
 export async function POST() {
@@ -13,6 +13,6 @@ export async function POST() {
     return NextResponse.json(await refreshBoard());
   } catch (error) {
     const failure = failureMessage(error);
-    return NextResponse.json(readBoard(failure.message, failure.errorCode), { status: 503 });
+    return NextResponse.json(await readBoard(failure.message, failure.errorCode), { status: 503 });
   }
 }

@@ -80,7 +80,7 @@ export function BoardClient() {
           <div className="reading-top">
             <span>{latest ? `${latest.dayKey} · ${latest.source}` : "관측값 준비 중"}</span>
             <button onClick={() => void load("POST")} disabled={loading}>
-              {loading ? "확인 중…" : "새로 조회하기"}
+              {loading ? "확인 중…" : "최신 상태 확인"}
             </button>
           </div>
           <div className="value-row">
@@ -108,8 +108,8 @@ export function BoardClient() {
       </section>
 
       <section className="lab-cta">
-        <p>데이터가 멈춘 다섯 순간을 직접 확인해 보세요.</p>
-        <Link href="/lab">검증 실험실 열기 ↗</Link>
+        <p>실패 상태와 실제 수집 근거를 직접 확인해 보세요.</p>
+        <div><Link href="/evidence">실제 기록 근거 ↗</Link><Link href="/lab">검증 실험실 ↗</Link></div>
       </section>
 
       <footer><span>COSMIC PULSE</span><span>DATA WITH CONTEXT · 2026</span></footer>

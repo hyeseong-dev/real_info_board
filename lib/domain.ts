@@ -5,7 +5,10 @@ export type FailureCode =
   | "upstream_denied"
   | "rate_limited"
   | "offline"
-  | "format_changed";
+  | "format_changed"
+  | "source_stale";
+
+export type SyntheticFailureCode = Exclude<FailureCode, "source_stale">;
 
 export type SolarWindRecord = {
   dayKey: string;
@@ -16,6 +19,10 @@ export type SolarWindRecord = {
   observedAtUtc: string;
   fetchedAtUtc: string;
   qualityCode: number | null;
+};
+
+export type EvidenceRecord = SolarWindRecord & {
+  rawSha256: string;
 };
 
 export type BoardSnapshot = {

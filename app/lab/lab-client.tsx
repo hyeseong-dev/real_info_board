@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { FailureCode, SyntheticRun } from "@/lib/domain";
+import type { SyntheticFailureCode, SyntheticRun } from "@/lib/domain";
 
-const scenarios: Array<{ code: FailureCode; label: string }> = [
+const scenarios: Array<{ code: SyntheticFailureCode; label: string }> = [
   { code: "slow_response", label: "느린 응답" },
   { code: "upstream_denied", label: "접근 거절" },
   { code: "rate_limited", label: "호출 제한" },
