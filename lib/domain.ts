@@ -26,6 +26,7 @@ export type EvidenceRecord = SolarWindRecord & {
 };
 
 export type BoardSnapshot = {
+  history?: SolarWindRecord[];
   status: Freshness;
   latest: SolarWindRecord | null;
   previous: SolarWindRecord | null;

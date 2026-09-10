@@ -142,3 +142,211 @@ footer { padding: 28px 36px; display: flex; justify-content: space-between; font
   .evidence-list { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Observatory theme */
+:root {
+  color-scheme: dark;
+  --ink: #eef1f8;
+  --muted: #a0abc1;
+  --paper: #070a12;
+  --lime: #ffc18c;
+  --mint: #93dfcc;
+  --line: rgba(171, 189, 224, .18);
+}
+body {
+  background:
+    radial-gradient(1px 1px at 21px 39px, #98a8cc80 90%, transparent),
+    radial-gradient(1px 1px at 104px 138px, #ccd6ed60 90%, transparent),
+    radial-gradient(1px 1px at 204px 81px, #889ec155 90%, transparent),
+    radial-gradient(ellipse at 78% 12%, #41221144, transparent 40%),
+    radial-gradient(ellipse at 12% 52%, #192b4c55, transparent 50%), #070a12;
+  background-size: 263px 263px, 349px 349px, 421px 421px, auto, auto, auto;
+}
+button:focus-visible, a:focus-visible { outline-color: #ffc18c; }
+.nav { max-width: 1320px; padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.brand { letter-spacing: .12em; font-size: 13px; }
+.brand-mark { background: #ffc18c; box-shadow: 0 0 20px #f4935a88; margin-right: 4px; }
+.status-pill { background: #11182799; color: #c5cfe0; font-size: 12px; }
+.status-fresh span { background: #93dfcc; box-shadow: 0 0 12px #93dfcc66; }
+.hero { max-width: 1320px; padding: 32px 36px 80px; }
+.hero-intro { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 24px; }
+.hero-copy { padding-bottom: 50px; }
+.eyebrow, .section-index { color: #cba587; font-size: 10px; line-height: 1.6; letter-spacing: .16em; }
+h1 { font-size: clamp(40px, 4.6vw, 66px); line-height: 1.22; letter-spacing: -.065em; margin: 25px 0; }
+h1 span { color: #ffc18c; }
+.lede { font-size: 16px; line-height: 1.9; }
+.explore-link { display: inline-flex; align-items: center; gap: 38px; margin-top: 34px; padding-bottom: 12px; border-bottom: 1px solid #798297; text-decoration: none; font-size: 13px; }
+.explore-link span { color: #ffc18c; }
+.solar-observation { margin: 0; min-width: 0; }
+.solar-frame { position: relative; aspect-ratio: 1; }
+.solar-image { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .6s ease; mix-blend-mode: screen; }
+.solar-image.is-ready { opacity: 1; }
+.solar-orbit { position: absolute; inset: 6%; border: 1px solid #c9a78620; border-radius: 50%; box-shadow: 0 0 85px #c4661815; }
+.solar-orbit::after { content: ''; position: absolute; inset: -6%; border: 1px dashed #a6b5d215; border-radius: 50%; }
+.solar-coordinate { position: absolute; left: 0; top: 12%; color: #a0abc1; font: 10px var(--font-geist-mono), monospace; letter-spacing: .1em; z-index: 1; }
+.solar-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: var(--muted); font-size: 13px; }
+.solar-placeholder button { padding: 11px 16px; border-radius: 99px; border: 1px solid var(--line); background: #182034; color: var(--ink); cursor: pointer; }
+.solar-observation figcaption { padding: 8px 12px 24px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.solar-caption-title { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.solar-caption-title > span { color: #ffc18c; letter-spacing: .16em; font-family: var(--font-geist-mono), monospace; }
+.solar-caption-title a { text-underline-offset: 4px; }
+.solar-observation figcaption p { margin: 8px 0 0; }
+.solar-disclaimer { max-width: 500px; font-size: 10px; }
+.reading-card { margin-top: 25px; padding: 30px 34px; border-radius: 22px; background: linear-gradient(115deg, #151d2de8, #0c111ded); border: 1px solid var(--line); box-shadow: 0 22px 70px #0003; backdrop-filter: none; scroll-margin-top: 24px; }
+.reading-card > .eyebrow { margin: 0 0 22px; }
+.reading-top button { color: #141019; background: #ffc18c; min-height: 44px; font-size: 12px; font-weight: 600; }
+.value-row { margin-top: 26px; }
+.value-row strong { font-size: clamp(80px, 10vw, 132px); font-variant-numeric: tabular-nums; letter-spacing: -.065em; }
+.value-row span { color: #a0abc1; font-size: 22px; }
+.delta { color: #c3cde0; font-size: 15px; margin: 22px 0 30px; }
+.notice { color: #ffdbaf; background: #3c2b1d; line-height: 1.6; }
+.metadata dd { font-size: 12px; overflow-wrap: anywhere; }
+.source-link { color: #aebdd5; }
+.explain { background: #090e18b3; border-block: 1px solid var(--line); padding-top: 70px; padding-bottom: 70px; }
+.explain h2 { font-size: clamp(34px, 4vw, 52px); line-height: 1.2; }
+.explain p:not(.section-index) { color: var(--muted); font-size: 15px; }
+.lab-cta { background: #101725; }
+.lab-cta p { color: #c8d2e4; font-size: 15px; font-weight: 400; }
+.lab-cta a { color: #ffc18c; font-size: 13px; }
+footer { color: #a0abc1; border-top: 1px solid var(--line); font-size: 10px; }
+.scenario-grid button { background: #131b2a; color: var(--ink); }
+.scenario-grid button:hover { background: #26324a; }
+.lab-result { background: #101827; border: 1px solid var(--line); }
+.recover { color: #16121a; }
+.evidence-status { background: #182639; border: 1px solid var(--line); }
+.evidence-list article { background: #101827; border: 1px solid var(--line); }
+@media (max-width: 720px) {
+  .nav { padding: 22px 20px; }
+  .brand { font-size: 11px; letter-spacing: .07em; }
+  .hero { padding: 42px 20px 54px; }
+  .hero-intro { grid-template-columns: 1fr; gap: 16px; }
+  .hero-copy { padding-bottom: 0; }
+  .hero h1 { font-size: clamp(36px, 9vw, 60px); }
+  .lede { font-size: 14px; }
+  .explore-link { margin-top: 22px; }
+  .solar-observation { width: 100%; max-width: 480px; justify-self: center; }
+  .reading-card { margin-top: 12px; padding: 24px 20px; }
+  .reading-top { gap: 12px; font-size: 11px; align-items: center; }
+  .reading-top button { flex-shrink: 0; padding: 10px 13px; }
+  .metadata { gap: 0 10px; }
+  .metadata div { padding-right: 0; }
+  .metadata dd { font-size: 11px; }
+  .explain { gap: 24px; padding: 50px 20px; }
+  footer { gap: 20px; font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .solar-image { transition: none; } }
+
+/* Daily journal: the observed change leads, solar imagery adds context. */
+.diary-page .hero { padding-top: 52px; padding-bottom: 48px; }
+.diary-page .hero-intro { align-items: start; grid-template-columns: 1.12fr 1fr; gap: 40px; }
+.diary-page .hero-copy { padding: 0; min-width: 0; }
+.diary-tagline { font-size: 13px; color: #b1bdd1; margin: 12px 0 24px; }
+.diary-page h1 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.3; max-width: 520px; text-wrap: balance; margin: 0 0 18px; }
+.diary-page .lede { font-size: 12px; letter-spacing: .04em; }
+.diary-page .reading-card { padding: 25px; margin-top: 24px; }
+.diary-page .reading-card > .eyebrow { font-size: 9px; margin-bottom: 16px; }
+.diary-page .reading-top { font-size: 11px; gap: 10px; }
+.diary-page .reading-top button { padding: 10px 14px; }
+.diary-page .value-row strong { font-size: clamp(78px, 8vw, 112px); }
+.diary-page .delta { color: #ffcc9f; margin: 20px 0 10px; font-size: 16px; }
+.reading-context { color: var(--muted); font-size: 11px; line-height: 1.7; margin: 0 0 18px; }
+.diary-page .metadata { grid-template-columns: 1fr 1fr; }
+.diary-page .metadata div { padding-top: 18px; }
+.diary-visual { min-width: 0; padding-top: 30px; }
+.visual-note { margin: 18px 12px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.9; color: #e7bb94; }
+.visual-note span { color: var(--muted); font-size: 12px; }
+.daily-log { max-width: 1320px; margin: 0 auto; padding: 36px 36px 70px; scroll-margin-top: 24px; }
+.log-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+.log-heading h2 { margin: 12px 0 0; font-size: clamp(28px, 3vw, 40px); letter-spacing: -.04em; }
+.log-heading > span { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.log-description { max-width: 690px; color: var(--muted); font-size: 12px; line-height: 1.9; margin: 20px 0 28px; }
+.log-list { padding: 0; margin: 0; list-style: none; border-top: 1px solid var(--line); }
+.log-list li { display: grid; grid-template-columns: 1fr 1fr 1.5fr auto; align-items: center; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.log-day { display: grid; gap: 8px; }
+.log-day span { color: #d1ab8c; font-size: 10px; }
+.log-day time { font: 13px var(--font-geist-mono), monospace; }
+.log-list strong { font-size: 30px; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.log-list small { color: var(--muted); font-size: 11px; letter-spacing: 0; font-weight: 400; }
+.log-times { display: grid; gap: 7px; color: var(--muted); font-size: 11px; }
+.log-list a { padding: 12px 0; font-size: 11px; text-underline-offset: 4px; }
+.log-empty { padding: 28px; border: 1px dashed var(--line); color: var(--muted); font-size: 13px; line-height: 1.8; }
+@media (max-width: 850px) {
+  .diary-page .hero-intro { grid-template-columns: 1fr; gap: 20px; }
+  .diary-page h1 { max-width: 600px; font-size: clamp(32px, 6vw, 48px); }
+  .diary-visual { max-width: 520px; width: 100%; justify-self: center; padding-top: 10px; }
+}
+@media (max-width: 720px) {
+  .diary-page .hero { padding-top: 34px; }
+  .diary-page .reading-card { padding: 22px 18px; }
+  .diary-page .value-row strong { font-size: clamp(74px, 20vw, 110px); }
+  .daily-log { padding: 12px 20px 48px; }
+  .log-heading { align-items: start; flex-direction: column; gap: 12px; }
+  .log-list li { grid-template-columns: 1fr auto; gap: 16px; }
+  .log-list strong { text-align: right; }
+  .log-times { font-size: 10px; }
+  .log-list a { justify-self: end; }
+}
+
+/* Station observatory: quiet starfield, structural frames, instrument typography. */
+:root { --line: rgba(131, 190, 222, .24); --muted: #a6bacd; }
+body { background: radial-gradient(ellipse at 80% 18%, #18385138, transparent 55%), radial-gradient(ellipse at 5% 80%, #25375240, transparent 45%), #040810; font-family: var(--font-geist), sans-serif; }
+.station-sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.station-sky svg { width: 100%; height: 100%; }
+.station-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #08121b11, transparent 40%, #08121b22); }
+.sky-beacons { animation: beacon-glow 9s ease-in-out infinite alternate; }
+@keyframes beacon-glow { from { opacity: .35; } to { opacity: .8; } }
+.nav { position: relative; background: #08131ee6; border: 1px solid var(--line); border-top: 0; margin-top: 0; padding-top: 22px; padding-bottom: 22px; }
+.nav::after { content: ''; position: absolute; bottom: -1px; left: 36px; width: 74px; height: 2px; background: #a4e3fa; box-shadow: 0 0 12px #6bbdd877; }
+.brand { font-family: var(--font-geist-mono), sans-serif; font-size: 20px; font-weight: 700; letter-spacing: .16em; }
+.brand-mark { width: 12px; height: 12px; background: #a5e8f5; border-radius: 3px; transform: rotate(45deg); box-shadow: 0 0 18px #6bdcff55; }
+.station-label { font-family: var(--font-geist-mono), sans-serif; font-size: 12px; letter-spacing: .18em; color: #b0cada; }
+.station-label span { color: #8ea7bb; font: 10px var(--font-geist), sans-serif; letter-spacing: 0; margin-left: 12px; }
+.status-pill { border-radius: 4px; background: #10202c; font-size: 11px; }
+.eyebrow, .section-index { font-family: var(--font-geist-mono), sans-serif; color: #93d5ec; font-size: 12px; font-weight: 600; letter-spacing: .18em; }
+.diary-page h1 { font-weight: 600; letter-spacing: -.045em; font-size: clamp(30px, 3.15vw, 44px); line-height: 1.45; word-break: keep-all; text-shadow: 0 2px 24px #040810; }
+.diary-tagline { color: #adc3d6; letter-spacing: .025em; }
+.diary-page .hero-copy > .eyebrow { display: inline-block; border-left: 2px solid #90d8f2; padding-left: 12px; }
+.diary-page .reading-card { border-radius: 6px; border: 1px solid #76afcf55; background: linear-gradient(125deg, #101f2eeb, #08121ded); box-shadow: inset 0 1px 0 #caeaff12, 0 18px 60px #0004; padding: 28px; }
+.reading-card::before, .reading-card::after { content: ''; position: absolute; width: 14px; height: 14px; pointer-events: none; border-color: #a6ddef; border-style: solid; }
+.reading-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.reading-card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.diary-page .reading-card > .eyebrow { font-size: 10px; letter-spacing: .11em; }
+.diary-page .value-row strong { font-family: var(--font-geist-mono), sans-serif; font-size: clamp(88px, 10vw, 140px); font-weight: 600; letter-spacing: -.025em; line-height: .85; color: #e4f7ff; text-shadow: 0 0 30px #76d8ff1a; }
+.value-row span { font-family: var(--font-geist-mono), sans-serif; font-size: 24px; font-weight: 500; }
+.diary-page .reading-top button, .solar-placeholder button, .recover { border-radius: 4px; border: 1px solid #b8e8f277; background: #b9eaf3; color: #091822; min-height: 44px; }
+.diary-page .reading-top button:hover:not(:disabled), .solar-placeholder button:hover { background: #d8f5ff; }
+.metadata dt { color: #86a7bc; }
+.metadata dd { color: #d3e3ef; line-height: 1.7; }
+.diary-visual { position: relative; padding: 18px; border: 1px solid #7ba7c32b; background: linear-gradient(180deg, #0b182315, #0b18234d); }
+.diary-visual::before { content: ''; position: absolute; top: -1px; right: -1px; height: 12px; width: 56px; border-top: 2px solid #a5d2e0; border-right: 2px solid #a5d2e0; }
+.solar-orbit { border-color: #a1d2ea30; box-shadow: 0 0 80px #88cfff0a; }
+.solar-orbit::after { border-color: #9cc5e02b; }
+.solar-coordinate, .solar-caption-title > span { font-family: var(--font-geist-mono), sans-serif; color: #afd8e9; font-size: 11px; }
+.solar-disclaimer { font-size: 11px; line-height: 1.9; }
+.diary-page .solar-observation figcaption { padding: 10px 0 18px; }
+.visual-note { margin: 8px 0; font-size: 13px; }
+.daily-log { border-top: 1px solid var(--line); }
+.log-heading h2, .explain h2 { font-weight: 500; letter-spacing: -.035em; }
+.log-list { background: #0a1722b8; border: 1px solid var(--line); }
+.log-list li { padding: 24px; }
+.log-list li:last-child { border-bottom: 0; }
+.log-list strong { font-family: var(--font-geist-mono), sans-serif; font-size: 36px; font-weight: 600; letter-spacing: .015em; }
+.log-day time { font-family: var(--font-geist-mono), sans-serif; font-size: 16px; letter-spacing: .06em; }
+.explain { background: #08131de6; }
+.lab-cta { background: #0d1b27e8; }
+footer { background: #07111be0; font-family: var(--font-geist-mono), sans-serif; font-size: 12px; }
+.lab-result, .evidence-status, .evidence-list article, .scenario-grid button { border-radius: 6px; border: 1px solid var(--line); }
+.lab-result > strong, .evidence-list article > strong { font-family: var(--font-geist-mono), sans-serif; }
+@media (max-width: 850px) { .station-label { display: none; } .diary-visual { max-width: 520px; } }
+@media (max-width: 720px) {
+  .nav { padding: 20px; }
+  .brand { font-size: 16px; letter-spacing: .12em; }
+  .diary-page .reading-card { padding: 24px 18px; }
+  .diary-page .value-row strong { font-size: clamp(84px, 24vw, 126px); }
+  .diary-page h1 { font-size: 32px; }
+  .diary-visual { padding: 12px; }
+  .log-list li { padding: 20px 14px; }
+  .log-times { font-size: 10px; line-height: 1.6; }
+  footer { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .sky-beacons { animation: none; } }

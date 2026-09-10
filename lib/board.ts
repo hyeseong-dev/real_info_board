@@ -56,9 +56,11 @@ export function failureMessage(error: unknown): Pick<BoardSnapshot, "message" | 
 }
 
 export async function readBoard(message: string | null = null, errorCode: BoardSnapshot["errorCode"] = null): Promise<BoardSnapshot> {
-  const [latest = null, previous = null] = await latestRecords(2);
-  if (!latest) return { status: "empty", latest, previous, deltaKms: null, message, errorCode };
+  const history = await latestRecords(7);
+  const [latest = null, previous = null] = history;
+  if (!latest) return { status: "empty", latest, previous, history, deltaKms: null, message, errorCode };
   return {
+    history,
     status: message ? "stale" : "fresh",
     latest,
     previous,
