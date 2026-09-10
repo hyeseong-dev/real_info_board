@@ -186,7 +186,7 @@ npm run build
 
 ## 로컬 실행
 
-요구 환경은 Node.js 20 이상과 npm입니다.
+요구 환경은 Node.js 20.9 이상과 npm입니다.
 
 ```bash
 git clone https://github.com/hyeseong-dev/real_info_board.git
