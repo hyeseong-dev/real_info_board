@@ -31,12 +31,12 @@ afterAll(() => {
 });
 
 describe("daily records and submission evidence", () => {
-  it("upserts a KST day while freezing its first evidence version", () => {
+  it("upserts a KST day and keeps its evidence version aligned", () => {
     saveDailyRecord(value(410, "2026-09-09T01:00:00"), new Date("2026-09-09T01:05:00Z"));
     saveDailyRecord(value(430, "2026-09-09T02:00:00"), new Date("2026-09-09T02:05:00Z"));
     expect(getLatestRecords()).toHaveLength(1);
     expect(getLatestRecords()[0].speedKms).toBe(430);
-    expect(getEvidenceRecords()).toMatchObject([{ speedKms: 410, dayKey: "2026-09-09" }]);
+    expect(getEvidenceRecords()).toMatchObject([{ speedKms: 430, dayKey: "2026-09-09" }]);
   });
 
   it("keeps submission evidence at exactly two real day keys", () => {

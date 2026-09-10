@@ -21,7 +21,7 @@ afterEach(() => {
 describe("Supabase storage adapter", () => {
   it("maps server-side REST records to the public record shape", async () => {
     vi.stubEnv("SUPABASE_URL", "https://example.supabase.co");
-    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "server-secret");
+    vi.stubEnv("SUPABASE_SECRET_KEY", "sb_secret_server-secret");
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify([row])));
     vi.stubGlobal("fetch", fetchMock);
 
@@ -29,12 +29,26 @@ describe("Supabase storage adapter", () => {
       { dayKey: "2026-09-09", speedKms: 438.4, source: "SOLAR1" },
     ]);
     const [, init] = fetchMock.mock.calls[0];
-    expect(init.headers.Authorization).toBe("Bearer server-secret");
+    expect(init.headers.apikey).toBe("sb_secret_server-secret");
+    expect(init.headers.Authorization).toBeUndefined();
+  });
+
+  it("keeps legacy service-role JWT authentication compatible", async () => {
+    vi.stubEnv("SUPABASE_URL", "https://example.supabase.co");
+    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "legacy-service-role-jwt");
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify([row])));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await getSupabaseLatestRecords(2);
+
+    const [, init] = fetchMock.mock.calls[0];
+    expect(init.headers.apikey).toBe("legacy-service-role-jwt");
+    expect(init.headers.Authorization).toBe("Bearer legacy-service-role-jwt");
   });
 
   it("sends the KST key and original payload to the atomic save RPC", async () => {
     vi.stubEnv("SUPABASE_URL", "https://example.supabase.co");
-    vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "server-secret");
+    vi.stubEnv("SUPABASE_SECRET_KEY", "sb_secret_server-secret");
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify([row])));
     vi.stubGlobal("fetch", fetchMock);
 

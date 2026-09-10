@@ -78,7 +78,19 @@ begin
     p_day_key, p_speed_kms, p_source, p_source_url, p_observed_at_raw, p_observed_at_utc,
     p_fetched_at_utc, p_quality_code, p_raw_sha256, p_raw_payload, p_fetched_at_utc
   where (select count(*) from public.submission_evidence) < 2
-  on conflict (day_key) do nothing;
+     or exists (select 1 from public.submission_evidence where day_key = p_day_key)
+  on conflict (day_key) do update set
+    speed_kms = excluded.speed_kms,
+    source = excluded.source,
+    source_url = excluded.source_url,
+    observed_at_raw = excluded.observed_at_raw,
+    observed_at_utc = excluded.observed_at_utc,
+    fetched_at_utc = excluded.fetched_at_utc,
+    quality_code = excluded.quality_code,
+    raw_sha256 = excluded.raw_sha256,
+    raw_payload = excluded.raw_payload,
+    captured_at_utc = excluded.captured_at_utc
+  where excluded.fetched_at_utc >= public.submission_evidence.fetched_at_utc;
 
   return query select * from public.daily_records where day_key = p_day_key;
 end;

@@ -17,9 +17,9 @@ type SupabaseRecord = {
 
 function configuration() {
   const url = process.env.SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
-    throw new Error("Supabase storage requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY");
+    throw new Error("Supabase storage requires SUPABASE_URL and SUPABASE_SECRET_KEY");
   }
   return { url, key };
 }
@@ -31,7 +31,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     cache: "no-store",
     headers: {
       apikey: key,
-      Authorization: `Bearer ${key}`,
+      ...(key.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${key}` }),
       "Content-Type": "application/json",
       ...init?.headers,
     },

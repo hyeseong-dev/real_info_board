@@ -15,3 +15,6 @@ coverage/
 *.tsbuildinfo
 .tmp/
 *.inspect.ndjson
+
+.vercel
+.env*

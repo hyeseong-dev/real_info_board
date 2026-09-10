@@ -111,11 +111,23 @@ export function saveDailyRecord(value: NormalizedSolarWind, fetchedAt: Date): So
       )
       SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
       WHERE (SELECT COUNT(*) FROM submission_evidence) < 2
-      ON CONFLICT(day_key) DO NOTHING
+         OR EXISTS (SELECT 1 FROM submission_evidence WHERE day_key = ?)
+      ON CONFLICT(day_key) DO UPDATE SET
+        speed_kms = excluded.speed_kms,
+        source = excluded.source,
+        source_url = excluded.source_url,
+        observed_at_raw = excluded.observed_at_raw,
+        observed_at_utc = excluded.observed_at_utc,
+        fetched_at_utc = excluded.fetched_at_utc,
+        quality_code = excluded.quality_code,
+        raw_sha256 = excluded.raw_sha256,
+        raw_payload = excluded.raw_payload,
+        captured_at_utc = excluded.captured_at_utc
+      WHERE excluded.fetched_at_utc >= submission_evidence.fetched_at_utc
     `).run(
       dayKey, value.speedKms, value.source, NOAA_SOLAR_WIND_URL, value.observedAtRaw,
       value.observedAtUtc, fetchedAtUtc, value.qualityCode, value.rawSha256,
-      value.rawPayload, fetchedAtUtc,
+      value.rawPayload, fetchedAtUtc, dayKey,
     );
   })();
   return getDailyRecord(dayKey) as SolarWindRecord;

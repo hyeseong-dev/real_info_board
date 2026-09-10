@@ -12,7 +12,7 @@ npm run dev
 
 기본 개발 저장소는 `.data/cosmic-pulse.db`의 SQLite입니다. Vercel 배포에서는 함수 로컬 파일을 영구 저장소로 사용하지 않으며, 배포 전에 외부 SQLite 또는 Supabase 어댑터를 선택합니다.
 
-Vercel에서 Supabase를 사용할 때는 [supabase/schema.sql](./supabase/schema.sql)을 적용한 뒤 `DATABASE_PROVIDER=supabase`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`을 서버 환경변수로 설정합니다. 서비스 역할 키는 브라우저 코드나 `NEXT_PUBLIC_*` 변수에 넣지 않습니다.
+Vercel에서 Supabase를 사용할 때는 [supabase/schema.sql](./supabase/schema.sql)을 적용한 뒤 `DATABASE_PROVIDER=supabase`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY`를 서버 환경변수로 설정합니다. 이전 service-role JWT는 `SUPABASE_SERVICE_ROLE_KEY`로도 사용할 수 있습니다. 비밀 키는 브라우저 코드나 `NEXT_PUBLIC_*` 변수에 넣지 않습니다.
 
 ## Checks
 
