@@ -36,7 +36,9 @@ export type BoardSnapshot = {
 };
 
 export type SyntheticRun = {
+  packageId: string;
   fixtureId: string;
+  sequence: string[];
   label: string;
   status: "stale" | "fresh";
   errorCode: FailureCode | null;
@@ -46,4 +48,9 @@ export type SyntheticRun = {
   lastGoodValue: number;
   lastGoodObservedAtUtc: string;
   lastGoodFetchedAtUtc: string;
+  rowsBeforeAction: number;
+  rowsAfterAction: number;
+  rowsAdded: number;
+  statePreserved: boolean;
+  storageIsolation: "in_memory";
 };

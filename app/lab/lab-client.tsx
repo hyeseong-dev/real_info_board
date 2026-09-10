@@ -34,9 +34,9 @@ export function LabClient() {
     <main className="lab-shell">
       <nav className="lab-nav"><Link href="/">← 오늘의 태양풍</Link><span>검증 실험실</span></nav>
       <section className="lab-intro">
-        <p className="eyebrow">DEVELOPMENT REPLAY LAB</p>
+        <p className="eyebrow">ALTERNATIVE T04 REPLAY LAB</p>
         <h1>실패해도<br />사실은 남아야 하니까</h1>
-        <p>아래 데이터는 개발용 합성값입니다. 실제 기록과 저장 공간을 공유하지 않으며, 공식 과제 fixture가 아닙니다.</p>
+        <p>공식 과제 asset이 제공되지 않아 승인된 공개 대체 패키지 ALT-T04-COSMIC-PULSE-V1을 사용합니다. 합성값은 실제 기록과 저장 공간을 공유하지 않습니다.</p>
       </section>
       <section className="scenario-grid" aria-label="합성 실패 선택">
         {scenarios.map((scenario) => (
@@ -54,10 +54,13 @@ export function LabClient() {
             <dl>
               <div><dt>error_code</dt><dd>{result.errorCode ?? "none"}</dd></div>
               <div><dt>일별 기록</dt><dd>{result.dailyCount}건</dd></div>
+              <div><dt>행 변화</dt><dd>{result.rowsBeforeAction} → {result.rowsAfterAction} ({result.rowsAdded >= 0 ? "+" : ""}{result.rowsAdded})</dd></div>
+              <div><dt>저장 보존</dt><dd>{result.statePreserved ? "확인" : "불일치"}</dd></div>
+              <div><dt>격리 저장소</dt><dd>{result.storageIsolation}</dd></div>
               <div><dt>마지막 관측 시각</dt><dd>{result.lastGoodObservedAtUtc}</dd></div>
               <div><dt>마지막 조회 시각</dt><dd>{result.lastGoodFetchedAtUtc}</dd></div>
             </dl>
-            <button className="recover" disabled={loading} onClick={() => void replay("DEV-RECOVER-D2")}>{result.action} · D2 복구 재생</button>
+            <button className="recover" disabled={loading} onClick={() => void replay("ALT-T04-RECOVER-D2")}>{result.action} · D2 복구 재생</button>
           </>
         ) : <p className="result-empty">실패 상황 하나를 선택하면 상태와 보존 결과가 여기에 나타납니다.</p>}
       </section>

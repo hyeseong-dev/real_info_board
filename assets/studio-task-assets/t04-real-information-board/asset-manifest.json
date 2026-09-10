@@ -1,0 +1,14 @@
+{
+  "packageId": "ALT-T04-COSMIC-PULSE-V1",
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "5df7886b5d7669110708c2dde36a1c04683d679c84c64e72fa84899864b07356"
+    },
+    {
+      "path": "public-contract.json",
+      "sha256": "b90c8ea8b6a0b86119a8f86261d51c58a66463b79b0bbcecbd26e72d89f1f020"
+    }
+  ]
+}

@@ -26,4 +26,4 @@
 
 ## 검증 범위
 
-저장소에 공식 `assets/studio-task-assets/t04-real-information-board/` 패키지가 제공되지 않아, 실패 재생은 동일한 다섯 상태를 구현한 `DEV-*` fixture로 검증했습니다. 공식 package ID·파일 SHA-256 및 `T04-RECOVER-D2` 재생은 해당 asset을 받으면 추가 확인합니다.
+헌법이 참조한 공식 패키지와 제공처가 프로젝트에 포함되지 않아 프로젝트 소유자의 지시에 따라 공개 대체 패키지 `ALT-T04-COSMIC-PULSE-V1`을 사용했습니다. 패키지는 `assets/studio-task-assets/t04-real-information-board/`에 있으며 계약 파일과 SHA-256 manifest를 함께 제공합니다. 정상 D1-A→D1-B, 실패 5종, 마지막 정상값 보존, stale 표시, 다시 시도, 다음 날짜 D2 복구와 중복 방지를 실제 격리 저장 흐름으로 검증했습니다.

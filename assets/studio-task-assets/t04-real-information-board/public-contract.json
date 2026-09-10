@@ -1,0 +1,37 @@
+{
+  "packageId": "ALT-T04-COSMIC-PULSE-V1",
+  "officialAssetAvailable": false,
+  "substitutionApprovedBy": "project-owner",
+  "approvedAtKst": "2026-09-10",
+  "storageIsolation": "in_memory",
+  "sequence": [
+    "ALT-T04-D1-A",
+    "ALT-T04-D1-B",
+    "one of five failure fixtures",
+    "ALT-T04-RECOVER-D2"
+  ],
+  "failureFixtures": {
+    "slow_response": "ALT-T04-SLOW",
+    "upstream_denied": "ALT-T04-DENIED",
+    "rate_limited": "ALT-T04-RATE-LIMIT",
+    "offline": "ALT-T04-OFFLINE",
+    "format_changed": "ALT-T04-FORMAT"
+  },
+  "failureAssertions": {
+    "status": "stale",
+    "rowsBeforeAction": 1,
+    "rowsAfterAction": 1,
+    "rowsAdded": 0,
+    "statePreserved": true,
+    "lastGoodValue": 421.6
+  },
+  "recoveryAssertions": {
+    "fixtureId": "ALT-T04-RECOVER-D2",
+    "status": "fresh",
+    "errorCode": null,
+    "rowsBeforeAction": 1,
+    "rowsAfterAction": 2,
+    "rowsAdded": 1,
+    "dailyCount": 2
+  }
+}
